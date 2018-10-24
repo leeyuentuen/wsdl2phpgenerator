@@ -110,9 +110,9 @@ class ComplexType extends Type
             if (!$member->getNullable()) {
                 if ($type == '\DateTime') {
                     if ($this->config->get('constructorParamsDefaultToNull')) {
-                        $constructorSource .= '  $this->' . $name . ' = $' . $name . ' ? $' . $name . '->format(\DateTime::ATOM) : null;' . PHP_EOL;
+                        $constructorSource .= '  $this->' . $name . ' = $' . $name . ' ? $' . $name . '->format(\'Y-m-d\TH:i:s\Z\') : null;' . PHP_EOL;
                     } else {
-                        $constructorSource .= '  $this->' . $name . ' = $' . $name . '->format(\DateTime::ATOM);' . PHP_EOL;
+                        $constructorSource .= '  $this->' . $name . ' = $' . $name . '->format(\'Y-m-d\TH:i:s\Z\');' . PHP_EOL;
                     }
                 } else {
                     $constructorSource .= '  $this->' . $name . ' = $' . $name . ';' . PHP_EOL;
@@ -147,10 +147,10 @@ class ComplexType extends Type
                     $setterCode = '  if ($' . $name . ' == null) {' . PHP_EOL
                         . '   $this->' . $name . ' = null;' . PHP_EOL
                         . '  } else {' . PHP_EOL
-                        . '    $this->' . $name . ' = $' . $name . '->format(\DateTime::ATOM);' . PHP_EOL
+                        . '    $this->' . $name . ' = $' . $name . '->format(\'Y-m-d\TH:i:s\Z\');' . PHP_EOL
                         . '  }' . PHP_EOL;
                 } else {
-                    $setterCode = '  $this->' . $name . ' = $' . $name . '->format(\DateTime::ATOM);' . PHP_EOL;
+                    $setterCode = '  $this->' . $name . ' = $' . $name . '->format(\'Y-m-d\TH:i:s\Z\');' . PHP_EOL;
                 }
             } else {
                 $setterCode = '  $this->' . $name . ' = $' . $name . ';' . PHP_EOL;
